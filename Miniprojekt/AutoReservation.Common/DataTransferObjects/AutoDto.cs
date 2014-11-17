@@ -14,15 +14,50 @@ namespace AutoReservation.Common.DataTransferObjects
         private AutoKlasse autoKlasse;
 
         [DataMember]
-        public int Id { get; set; }
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value) { id = value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public string Marke { get; set; }
+        public string Marke
+        {
+            get { return marke; }
+            set
+            {
+                if (marke != value) { marke = value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public double Tagestarif { get; set; }
+        public double Tagestarif
+        {
+            get { return tagestarif; }
+            set
+            {
+                if (tagestarif!= value) { tagestarif = value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public double Basistarif { get; set; }
+        public double Basistarif
+        {
+            get { return basistarif; }
+            set
+            {
+                if (basistarif!= value) { basistarif= value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public AutoKlasse AutoKlasse { get; set; }
+        public AutoKlasse AutoKlasse
+        {
+            get { return autoKlasse; }
+            set
+            {
+                if (autoKlasse!= value) { autoKlasse = value; RaisePropertyChanged(); }
+            }
+        }
 
         public override string Validate()
         {

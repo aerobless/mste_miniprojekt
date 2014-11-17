@@ -13,13 +13,41 @@ namespace AutoReservation.Common.DataTransferObjects
         private DateTime geburtsdatum;
 
         [DataMember]
-        public int Id { get; set; } 
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                if (id!= value) { id= value; RaisePropertyChanged(); }
+            }
+        } 
         [DataMember]
-        public string Nachname{ get; set; }
+        public string Nachname
+        {
+            get { return nachname; }
+            set
+            {
+                if (nachname != value) { nachname= value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public string Vorname { get; set; }
+        public string Vorname
+        {
+            get { return vorname; }
+            set
+            {
+                if (vorname!= value) { vorname= value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public DateTime Geburtsdatum { get; set; }
+        public DateTime Geburtsdatum
+        {
+            get { return geburtsdatum; }
+            set
+            {
+                if (geburtsdatum!= value) { geburtsdatum= value; RaisePropertyChanged(); }
+            }
+        }
 
         public override string Validate()
         {

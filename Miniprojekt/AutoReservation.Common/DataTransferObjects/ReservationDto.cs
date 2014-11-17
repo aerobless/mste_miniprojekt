@@ -9,20 +9,55 @@ namespace AutoReservation.Common.DataTransferObjects
     {
         private int reservationNr;
         private DateTime von;
-        private DateTime bbis;
+        private DateTime bis;
         private AutoDto auto;
         private KundeDto kunde;
 
         [DataMember]
-        public int ReservationNr { get; set; }
+        public int ReservationNr
+        {
+            get { return reservationNr; }
+            set
+            {
+                if (reservationNr!= value) { reservationNr= value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public DateTime Von { get; set; }
+        public DateTime Von
+        {
+            get { return von; }
+            set
+            {
+                if (von!= value) { von = value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public DateTime Bis { get; set; }
+        public DateTime Bis
+        {
+            get { return bis; }
+            set
+            {
+                if (bis!= value) { bis= value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public AutoDto Auto { get; set; }
+        public AutoDto Auto
+        {
+            get { return auto; }
+            set
+            {
+                if (auto != value) { auto = value; RaisePropertyChanged(); }
+            }
+        }
         [DataMember]
-        public KundeDto Kunde { get; set; }
+        public KundeDto Kunde
+        {
+            get { return kunde; }
+            set
+            {
+                if (kunde != value) { kunde= value; RaisePropertyChanged(); }
+            }
+        }
 
         public override string Validate()
         {
