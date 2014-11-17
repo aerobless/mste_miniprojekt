@@ -61,11 +61,57 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auto.cs">
+      <DependentUpon>Automodell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Automodell.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Automodell.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Automodell.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Automodell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Automodell.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Automodell.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Kunde.cs">
+      <DependentUpon>Automodell.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reservation.cs">
+      <DependentUpon>Automodell.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Automodell.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Automodell.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="Automodell.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Automodell.edmx</DependentUpon>
+      <LastGenOutput>Automodell.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Automodell.edmx.diagram">
+      <DependentUpon>Automodell.edmx</DependentUpon>
+    </None>
+    <None Include="Automodell.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Automodell.edmx</DependentUpon>
+      <LastGenOutput>Automodell.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
