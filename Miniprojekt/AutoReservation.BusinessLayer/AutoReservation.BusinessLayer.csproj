@@ -62,6 +62,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel.DomainServices.EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoReservationBusinessComponent.cs" />
@@ -74,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoReservation.Dal\AutoReservation.Dal.csproj">
-      <Project>{AB98AC63-032F-4050-9755-1E2235E9F1DD}</Project>
+      <Project>{ab98ac63-032f-4050-9755-1e2235e9f1dd}</Project>
       <Name>AutoReservation.Dal</Name>
     </ProjectReference>
   </ItemGroup>

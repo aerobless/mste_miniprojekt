@@ -80,15 +80,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AutoReservationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Auto">
+        <EntityType Name="Auto" Abstract="true">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="Fixed" />
           <Property Name="Marke" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" ConcurrencyMode="Fixed" />
-          <Property Name="AutoKlasse" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
           <Property Name="Tagestarif" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
-          <Property Name="Basistarif" Type="Int32" ConcurrencyMode="None" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Auto" FromRole="Auto" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="Kunde">
@@ -154,6 +152,11 @@
             <End Role="Reservation" EntitySet="Reservationen" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="LuxusklasseAuto" BaseType="AutoReservationModel.Auto" >
+          <Property Name="Basistarif" Type="Int32" ConcurrencyMode="None" />
+        </EntityType>
+        <EntityType Name="MittelklasseAuto" BaseType="AutoReservationModel.Auto" />
+        <EntityType Name="StandardAuto" BaseType="AutoReservationModel.Auto" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -161,13 +164,30 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AutoReservationModelStoreContainer" CdmEntityContainer="AutoReservationEntities">
           <EntitySetMapping Name="Autos">
-            <EntityTypeMapping TypeName="AutoReservationModel.Auto">
+            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.Auto)">
               <MappingFragment StoreEntitySet="Auto">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Marke" ColumnName="Marke" />
-                <ScalarProperty Name="AutoKlasse" ColumnName="AutoKlasse" />
                 <ScalarProperty Name="Tagestarif" ColumnName="Tagestarif" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.LuxusklasseAuto)">
+              <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Basistarif" ColumnName="Basistarif" />
+                <Condition ColumnName="AutoKlasse" Value="0" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.MittelklasseAuto)">
+              <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition ColumnName="AutoKlasse" Value="1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.StandardAuto)">
+              <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition ColumnName="AutoKlasse" Value="2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

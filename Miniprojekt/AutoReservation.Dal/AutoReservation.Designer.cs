@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\marco_000\HSR\Programmieren\git\MsTe_Miniprojekt\Miniprojekt\AutoReservation.Dal\Automodell.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\marco_000\HSR\Programmieren\git\MsTe_Miniprojekt\Miniprojekt\AutoReservation.Dal\AutoReservation.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
