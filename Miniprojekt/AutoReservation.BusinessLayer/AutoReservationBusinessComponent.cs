@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-//using AutoReservation.Dal;
 
 namespace AutoReservation.BusinessLayer
 {
@@ -22,77 +21,158 @@ namespace AutoReservation.BusinessLayer
 
         public List<Kunde> Kunden()
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                return context.Kunden.ToList();
+            }
         }
 
         public List<Auto> Autos()
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                return context.Autos.ToList();
+            }
         }
 
         public List<Reservation> Reservationen()
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                return context.Reservationen.ToList();
+            }
         }
 
-        public List<Kunde> GetKunde(int kundeId)
+        public Kunde GetKundeById(int kundeId)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                Kunde kunde = context.Kunden.SingleOrDefault(r => r.Id == kundeId);
+                return kunde;
+            }
         }
 
-        public List<Auto> GetAuto(int autoId)
+        public Auto GetAutoById(int autoId)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                Auto auto = context.Autos.SingleOrDefault(r => r.Id == autoId);
+                return auto;
+            }
         }
 
-        public List<Reservation> GetReservation(int reservationId)
+        public Reservation GetReservationById(int reservationId)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                Reservation reservation = context.Reservationen.Include(r => r.Auto).Include(r => r.Kunde).SingleOrDefault(r => r.ReservationNr == reservationId);
+                return reservation;
+            }
         }
 
-        public Kunde InsertKunde(Kunde kunde)
+        public void InsertKunde(Kunde kunde)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                context.Kunden.Add(kunde);
+            }
         }
 
-        public Auto InsertAuto(Auto auto)
+        public void InsertAuto(Auto auto)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                context.Autos.Add(auto);
+            }
         }
 
-        public Reservation InsertReservation(Reservation reservation)
+        public void InsertReservation(Reservation reservation)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                context.Reservationen.Add(reservation);
+            }
         }
 
-        public Kunde UpdateKunde(Kunde modified, Kunde original)
+        public void UpdateKunde(Kunde modified, Kunde original)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                try
+                {
+                    context.Kunden.Attach(original);
+                    context.Entry(original).CurrentValues.SetValues(modified);
+                    context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    HandleDbConcurrencyException(context, original);
+                }
+            }
         }
 
-        public Auto UpdateAuto(Auto modified, Auto original)
+        public void UpdateAuto(Auto modified, Auto original)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                try
+                {
+                    context.Autos.Attach(original);
+                    context.Entry(original).CurrentValues.SetValues(modified);
+                    context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    HandleDbConcurrencyException(context, original);
+                }
+            }
         }
 
-        public Reservation UpdateReservation(Reservation modified, Reservation original)
+        public void UpdateReservation(Reservation modified, Reservation original)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                try
+                {
+                    context.Reservationen.Attach(original);
+                    context.Entry(original).CurrentValues.SetValues(modified);
+                    context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    HandleDbConcurrencyException(context, original);
+                }
+            }
         }
 
-        public Kunde DeleteKunde(Kunde kunde)
+        public void DeleteKunde(Kunde kunde)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                context.Kunden.Attach(kunde);
+                context.Kunden.Remove(kunde);
+                context.SaveChanges();
+            }
         }
 
-        public Auto DeleteAuto(Auto auto)
+        public void DeleteAuto(Auto auto)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                context.Autos.Attach(auto);
+                context.Autos.Remove(auto);
+                context.SaveChanges();
+            }
         }
 
-        public Reservation DeleteReservation(Reservation reservation)
+        public void DeleteReservation(Reservation reservation)
         {
-            throw new NotImplementedException();
+            using (AutoReservationEntities context = new AutoReservationEntities())
+            {
+                context.Reservationen.Attach(reservation);
+                context.Reservationen.Remove(reservation);
+                context.SaveChanges();
+            }
         }
 
     }

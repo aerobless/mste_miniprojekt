@@ -10,20 +10,20 @@ namespace AutoReservation.Common.Interfaces
         List<AutoDto> Autos();
         List<ReservationDto> Reservationen();
 
-        List<KundeDto> GetKunde(int kundeId);
-        List<AutoDto> GetAuto(int autoId);
-        List<ReservationDto> GetReservation(int reservationId);
+        KundeDto GetKundeById(int kundeId);
+        AutoDto GetAutoById(int autoId);
+        ReservationDto GetReservationById(int reservationId);
 
-        KundeDto InsertKunde(KundeDto kunde);
-        AutoDto InsertAuto(AutoDto auto);
-        ReservationDto InsertReservation(ReservationDto reservation);
+        void InsertKunde(KundeDto kunde);
+        void InsertAuto(AutoDto auto);
+        void InsertReservation(ReservationDto reservation);
 
-        KundeDto UpdateKunde(KundeDto modified, KundeDto original);
-        AutoDto UpdateAuto(AutoDto modified, AutoDto original);
-        ReservationDto UpdateReservation(ReservationDto modified, ReservationDto original);
+        void UpdateKunde(KundeDto modified, KundeDto original);
+        void UpdateAuto(AutoDto modified, AutoDto original);
+        void UpdateReservation(ReservationDto modified, ReservationDto original);
 
-        KundeDto DeleteKunde(KundeDto kunde);
-        AutoDto DeleteAuto(AutoDto auto);
-        ReservationDto DeleteReservation(ReservationDto reservation);
+        void DeleteKunde(KundeDto kunde);
+        void DeleteAuto(AutoDto auto);
+        void DeleteReservation(ReservationDto reservation);
     }
 }

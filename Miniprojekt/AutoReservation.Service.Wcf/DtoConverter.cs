@@ -62,6 +62,7 @@ namespace AutoReservation.Service.Wcf
             return ConvertGenericList(autos, ConvertToDto);
         }
         #endregion
+
         #region Kunde
         public static Kunde ConvertToEntity(this KundeDto dto)
         {
@@ -75,6 +76,7 @@ namespace AutoReservation.Service.Wcf
                 Geburtsdatum = dto.Geburtsdatum
             };
         }
+
         public static KundeDto ConvertToDto(this Kunde kunde)
         {
             if (kunde == null) { return null; }
@@ -142,6 +144,7 @@ namespace AutoReservation.Service.Wcf
 
             return source.Select(s => converter(s)).ToList();
         }
+
     }
 
  

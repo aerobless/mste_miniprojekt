@@ -9,8 +9,8 @@ namespace AutoReservation.Common.DataTransferObjects
     {
         private int id;
         private string marke;
-        private double tagestarif;
-        private double basistarif;
+        private int tagestarif;
+        private Nullable<int> basistarif;
         private AutoKlasse autoKlasse;
 
         [DataMember]
@@ -32,7 +32,7 @@ namespace AutoReservation.Common.DataTransferObjects
             }
         }
         [DataMember]
-        public double Tagestarif
+        public int Tagestarif
         {
             get { return tagestarif; }
             set
@@ -41,7 +41,7 @@ namespace AutoReservation.Common.DataTransferObjects
             }
         }
         [DataMember]
-        public double Basistarif
+        public Nullable<int> Basistarif
         {
             get { return basistarif; }
             set

@@ -3,11 +3,16 @@ using System;
 using System.Diagnostics;
 using AutoReservation.Common.DataTransferObjects;
 using System.Collections.Generic;
+using AutoReservation.BusinessLayer;
+using AutoReservation.Service.Wcf;
 
 namespace AutoReservation.Service.Wcf
 {
     public class AutoReservationService : IAutoReservationService
     {
+
+        private AutoReservationBusinessComponent businessLayer = new AutoReservationBusinessComponent();
+
         private static void WriteActualMethod()
         {
             Console.WriteLine("Calling: " + new StackTrace().GetFrame(1).GetMethod().Name);
@@ -15,77 +20,116 @@ namespace AutoReservation.Service.Wcf
 
         public List<KundeDto> Kunden()
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            return DtoConverter.ConvertToDtos(businessLayer.Kunden());
         }
 
         public List<AutoDto> Autos()
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            return DtoConverter.ConvertToDtos(businessLayer.Autos());
         }
 
         public List<ReservationDto> Reservationen()
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            return DtoConverter.ConvertToDtos(businessLayer.Reservationen());
         }
 
-        public List<KundeDto> GetKunde(int kundeId)
+        public KundeDto GetKundeById(int kundeId)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            return DtoConverter.ConvertToDto(businessLayer.GetKundeById(kundeId));
         }
 
-        public List<AutoDto> GetAuto(int autoId)
+        public AutoDto GetAutoById(int autoId)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            return DtoConverter.ConvertToDto(businessLayer.GetAutoById(autoId));
         }
 
-        public List<ReservationDto> GetReservation(int reservationId)
+        public ReservationDto GetReservationById(int reservationId)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            return DtoConverter.ConvertToDto(businessLayer.GetReservationById(reservationId));
         }
 
-        public KundeDto InsertKunde(KundeDto kunde)
+        public void InsertKunde(KundeDto kunde)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            DtoConverter.ConvertToEntity(kunde);
+
         }
 
-        public AutoDto InsertAuto(AutoDto auto)
+        public void InsertAuto(AutoDto auto)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            DtoConverter.ConvertToEntity(auto);
         }
 
-        public ReservationDto InsertReservation(ReservationDto reservation)
+        public void InsertReservation(ReservationDto reservation)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            DtoConverter.ConvertToEntity(reservation);
         }
 
-        public KundeDto UpdateKunde(KundeDto modified, KundeDto original)
+        public void UpdateKunde(KundeDto modified, KundeDto original)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                businessLayer.UpdateKunde(DtoConverter.ConvertToEntity(modified), DtoConverter.ConvertToEntity(original));
+            }
+            catch (LocalOptimisticConcurrencyException<KundeDto>)
+            {
+                //   throw new faultexception
+            }
         }
 
-        public AutoDto UpdateAuto(AutoDto modified, AutoDto original)
+        public void UpdateAuto(AutoDto modified, AutoDto original)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                businessLayer.UpdateAuto(DtoConverter.ConvertToEntity(modified), DtoConverter.ConvertToEntity(original));
+            }
+            catch (LocalOptimisticConcurrencyException<KundeDto>)
+            {
+                //   throw new faultexception
+            }
+
         }
 
-        public ReservationDto UpdateReservation(ReservationDto modified, ReservationDto original)
+        public void UpdateReservation(ReservationDto modified, ReservationDto original)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                businessLayer.UpdateReservation(DtoConverter.ConvertToEntity(modified), DtoConverter.ConvertToEntity(original));
+            }
+            catch (LocalOptimisticConcurrencyException<KundeDto>)
+            {
+                //   throw new faultexception
+            }
         }
 
-        public KundeDto DeleteKunde(KundeDto kunde)
+        public void DeleteKunde(KundeDto kunde)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            businessLayer.DeleteKunde(DtoConverter.ConvertToEntity(kunde));
         }
 
-        public AutoDto DeleteAuto(AutoDto auto)
+        public void DeleteAuto(AutoDto auto)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            businessLayer.DeleteAuto(DtoConverter.ConvertToEntity(auto));
         }
 
-        public ReservationDto DeleteReservation(ReservationDto reservation)
+        public void DeleteReservation(ReservationDto reservation)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            businessLayer.DeleteReservation(DtoConverter.ConvertToEntity(reservation));
         }
     }
+
 }
