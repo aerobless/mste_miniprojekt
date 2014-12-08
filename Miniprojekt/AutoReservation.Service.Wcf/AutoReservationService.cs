@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using AutoReservation.BusinessLayer;
 using AutoReservation.Service.Wcf;
 using System.ServiceModel;
+using AutoReservation.Dal;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -90,9 +91,9 @@ namespace AutoReservation.Service.Wcf
             {
                 businessLayer.UpdateKunde(DtoConverter.ConvertToEntity(modified), DtoConverter.ConvertToEntity(original));
             }
-            catch (LocalOptimisticConcurrencyException<KundeDto>)
+            catch (LocalOptimisticConcurrencyException<Kunde> e)
             {
-                throw new FaultException("updateKunde failed");
+                throw new FaultException<KundeDto>(e.MergedEntity.ConvertToDto(), "kundeAuto failed");
             }
         }
 
@@ -103,9 +104,9 @@ namespace AutoReservation.Service.Wcf
             {
                 businessLayer.UpdateAuto(DtoConverter.ConvertToEntity(modified), DtoConverter.ConvertToEntity(original));
             }
-            catch (LocalOptimisticConcurrencyException<KundeDto>)
+            catch (LocalOptimisticConcurrencyException<Auto> e)
             {
-                throw new FaultException("updateAuto failed");
+                throw new FaultException<AutoDto>(e.MergedEntity.ConvertToDto(), "updateAuto failed");
             }
 
         }
@@ -117,9 +118,9 @@ namespace AutoReservation.Service.Wcf
             {
                 businessLayer.UpdateReservation(DtoConverter.ConvertToEntity(modified), DtoConverter.ConvertToEntity(original));
             }
-            catch (LocalOptimisticConcurrencyException<KundeDto>)
+            catch (LocalOptimisticConcurrencyException<Reservation> e)
             {
-                throw new FaultException("updateReservation failed");
+                throw new FaultException<ReservationDto>(e.MergedEntity.ConvertToDto(), "updateReservation failed");
             }
         }
 
