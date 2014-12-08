@@ -5,6 +5,7 @@ using AutoReservation.Common.DataTransferObjects;
 using System.Collections.Generic;
 using AutoReservation.BusinessLayer;
 using AutoReservation.Service.Wcf;
+using System.ServiceModel;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -18,22 +19,31 @@ namespace AutoReservation.Service.Wcf
             Console.WriteLine("Calling: " + new StackTrace().GetFrame(1).GetMethod().Name);
         }
 
-        public List<KundeDto> Kunden()
+        List<KundeDto> IAutoReservationService.Kunden
         {
-            WriteActualMethod();
-            return DtoConverter.ConvertToDtos(businessLayer.Kunden());
+            get
+            {
+                WriteActualMethod();
+                return DtoConverter.ConvertToDtos(businessLayer.Kunden());
+            }
         }
 
-        public List<AutoDto> Autos()
+        List<AutoDto> IAutoReservationService.Autos
         {
-            WriteActualMethod();
-            return DtoConverter.ConvertToDtos(businessLayer.Autos());
+            get
+            {
+                WriteActualMethod();
+                return DtoConverter.ConvertToDtos(businessLayer.Autos());
+            }
         }
 
-        public List<ReservationDto> Reservationen()
+        List<ReservationDto> IAutoReservationService.Reservationen
         {
-            WriteActualMethod();
-            return DtoConverter.ConvertToDtos(businessLayer.Reservationen());
+            get
+            {
+                WriteActualMethod();
+                return DtoConverter.ConvertToDtos(businessLayer.Reservationen());
+            }
         }
 
         public KundeDto GetKundeById(int kundeId)
@@ -82,7 +92,7 @@ namespace AutoReservation.Service.Wcf
             }
             catch (LocalOptimisticConcurrencyException<KundeDto>)
             {
-                //   throw new faultexception
+                throw new FaultException("updateKunde failed");
             }
         }
 
@@ -95,7 +105,7 @@ namespace AutoReservation.Service.Wcf
             }
             catch (LocalOptimisticConcurrencyException<KundeDto>)
             {
-                //   throw new faultexception
+                throw new FaultException("updateAuto failed");
             }
 
         }
@@ -109,7 +119,7 @@ namespace AutoReservation.Service.Wcf
             }
             catch (LocalOptimisticConcurrencyException<KundeDto>)
             {
-                //   throw new faultexception
+                throw new FaultException("updateReservation failed");
             }
         }
 
@@ -130,6 +140,6 @@ namespace AutoReservation.Service.Wcf
             WriteActualMethod();
             businessLayer.DeleteReservation(DtoConverter.ConvertToEntity(reservation));
         }
-    }
 
+    }
 }
