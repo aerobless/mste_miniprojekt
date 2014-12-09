@@ -174,37 +174,102 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void UpdateAutoTestWithOptimisticConcurrency()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            string brand = "Volvo";
+            int tarif = 1000;
+            AutoDto car1 = Target.GetAutoById(1);
+            car1.Marke = brand;
+            AutoDto car2 = Target.GetAutoById(1);
+            car2.Tagestarif = tarif;
+            AutoDto original = Target.GetAutoById(1);
+            Target.UpdateAuto(car2, original);
+
+            try
+            {
+                Target.UpdateAuto(car1, original);
+            }
+            catch (FaultException<AutoDto>)
+            {
+                throw;
+            }
+            catch
+            {
+                Assert.Fail("Bad Exception");
+            }
         }
 
         [TestMethod]
         public void UpdateKundeTestWithOptimisticConcurrency()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            string donald = "Donald";
+            string duck = "Duck";
+            KundeDto customer1 = Target.GetKundeById(1);
+            customer1.Vorname = donald;
+            KundeDto customer2 = Target.GetKundeById(1);
+            customer2.Nachname = duck;
+            KundeDto original = Target.GetKundeById(1);
+            Target.UpdateKunde(customer2, original);
+
+            try
+            {
+                Target.UpdateKunde(customer1, original);
+            }
+            catch (FaultException<KundeDto>)
+            {
+                throw;
+            }
+            catch
+            {
+                Assert.Fail("Bad Exception");
+            }
         }
 
         [TestMethod]
         public void UpdateReservationTestWithOptimisticConcurrency()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            ReservationDto original = Target.GetReservationById(1);
+            ReservationDto reservation1 = Target.GetReservationById(1);
+            AutoDto car = Target.GetAutoById(2);
+            reservation1.Auto = car;
+            ReservationDto reservation2 = Target.GetReservationById(1);
+            reservation2.Bis = DateTime.Today;
+            Target.UpdateReservation(reservation2, original);
+
+            try
+            {
+                Target.UpdateReservation(reservation1, original);
+            }
+            catch (FaultException<ReservationDto>)
+            {
+                throw;
+            }
+            catch
+            {
+                Assert.Fail("Bad Exception");
+            }
         }
 
         [TestMethod]
         public void DeleteKundeTest()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            KundeDto customer = Target.GetKundeById(1);
+            Target.DeleteKunde(customer);
+            Assert.AreEqual(3, Target.Kunden.Count);
         }
 
         [TestMethod]
         public void DeleteAutoTest()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            AutoDto car = Target.GetAutoById(1);
+            Target.DeleteAuto(car);
+            Assert.AreEqual(2, Target.Autos.Count);
         }
 
         [TestMethod]
         public void DeleteReservationTest()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            ReservationDto reservation = Target.GetReservationById(1);
+            Target.DeleteReservation(reservation);
+            Assert.AreEqual(2, Target.Reservationen.Count);
         }
     }
 }
