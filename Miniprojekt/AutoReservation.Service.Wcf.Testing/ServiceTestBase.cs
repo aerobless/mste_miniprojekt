@@ -5,10 +5,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using AutoReservation.Common.Interfaces;
 using AutoReservation.Dal;
 using AutoReservation.BusinessLayer;
-using AutoReservation.Common.Interfaces;
 using AutoReservation.BusinessLayer.Testing;
 
 namespace AutoReservation.Service.Wcf.Testing
@@ -183,17 +181,18 @@ namespace AutoReservation.Service.Wcf.Testing
             AutoDto original = Target.GetAutoById(1);
             Target.UpdateAuto(car2, original);
 
+            bool success = false;
             try
             {
                 Target.UpdateAuto(car1, original);
             }
             catch (FaultException<AutoDto>)
             {
-                throw;
+                success = true;
             }
-            catch
+            if (!success)
             {
-                Assert.Fail("Bad Exception");
+                Assert.Fail("No Exception thrown");
             }
         }
 
@@ -209,17 +208,18 @@ namespace AutoReservation.Service.Wcf.Testing
             KundeDto original = Target.GetKundeById(1);
             Target.UpdateKunde(customer2, original);
 
+            bool success = false;
             try
             {
                 Target.UpdateKunde(customer1, original);
             }
             catch (FaultException<KundeDto>)
             {
-                throw;
+                success = true;
             }
-            catch
+            if (!success)
             {
-                Assert.Fail("Bad Exception");
+                Assert.Fail("No Exception thrown");
             }
         }
 
@@ -234,17 +234,18 @@ namespace AutoReservation.Service.Wcf.Testing
             reservation2.Bis = DateTime.Today;
             Target.UpdateReservation(reservation2, original);
 
+            bool success = false;
             try
             {
                 Target.UpdateReservation(reservation1, original);
             }
             catch (FaultException<ReservationDto>)
             {
-                throw;
+                success = true;
             }
-            catch
+            if (!success)
             {
-                Assert.Fail("Bad Exception");
+                Assert.Fail("No Exception thrown");
             }
         }
 
