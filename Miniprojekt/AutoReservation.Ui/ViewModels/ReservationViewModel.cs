@@ -198,7 +198,10 @@ namespace AutoReservation.Ui.ViewModels
 
         private void New()
         {
-            Reservationen.Add(new ReservationDto { });
+            ReservationDto res = new ReservationDto();
+            res.Von = DateTime.Today;
+            res.Bis = DateTime.Today;
+            Reservationen.Add(res);
         }
 
         private bool CanNew()
@@ -240,8 +243,6 @@ namespace AutoReservation.Ui.ViewModels
                 SelectedReservation.ReservationNr != default(int) &&
                 Service != null;
         }
-
         #endregion
-
     }
 }

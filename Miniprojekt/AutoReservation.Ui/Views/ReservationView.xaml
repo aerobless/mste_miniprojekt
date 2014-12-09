@@ -103,10 +103,12 @@
             <ComboBox Grid.Column="1" Grid.Row="1" 
                       ItemsSource="{Binding Autos}"
                       DisplayMemberPath="Marke"
+                      IsSynchronizedWithCurrentItem="True"
                       SelectedItem="{Binding SelectedReservation.Auto}"
                       />
             <ComboBox Grid.Column="1" Grid.Row="2" 
                       ItemsSource="{Binding Kunden}"
+                      IsSynchronizedWithCurrentItem="True"
                       SelectedItem="{Binding SelectedReservation.Kunde}"
                       >
                 <ComboBox.ItemTemplate>
