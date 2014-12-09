@@ -75,7 +75,8 @@ namespace AutoReservation.Service.Wcf
         public void InsertAuto(AutoDto auto)
         {
             WriteActualMethod();
-            DtoConverter.ConvertToEntity(auto);
+            businessLayer.InsertAuto(DtoConverter.ConvertToEntity(auto));
+            //DtoConverter.ConvertToEntity(auto);
         }
 
         public void InsertReservation(ReservationDto reservation)

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using AutoReservation.Dal;
 using AutoReservation.BusinessLayer;
+using System.Collections.Generic;
 
 namespace AutoReservation.BusinessLayer.Testing
 {
@@ -40,6 +41,24 @@ namespace AutoReservation.BusinessLayer.Testing
 
             Auto updatedCar = Target.GetAutoById(1);
             Assert.AreEqual(googleCar, updatedCar.Marke);
+        }
+
+        [TestMethod]
+        public void InsertBusinessAutoTest()
+        {
+            const string brand = "Google Car";
+            const int tarif = 100;
+            const int id = 4;
+            StandardAuto car = new StandardAuto();
+            car.Marke = brand;
+            car.Id = id;
+            car.Tagestarif = tarif;
+            car.Reservation = new List<Reservation>();
+            Target.InsertAuto(car);
+
+            Auto autoCheck = Target.GetAutoById(id);
+            Assert.AreEqual(brand, autoCheck.Marke);
+            Assert.AreEqual(tarif, autoCheck.Tagestarif);
         }
 
         [TestMethod]
