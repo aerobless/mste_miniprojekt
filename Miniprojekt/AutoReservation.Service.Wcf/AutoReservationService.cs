@@ -68,21 +68,19 @@ namespace AutoReservation.Service.Wcf
         public void InsertKunde(KundeDto kunde)
         {
             WriteActualMethod();
-            DtoConverter.ConvertToEntity(kunde);
-
+            businessLayer.InsertKunde(DtoConverter.ConvertToEntity(kunde));
         }
 
         public void InsertAuto(AutoDto auto)
         {
             WriteActualMethod();
             businessLayer.InsertAuto(DtoConverter.ConvertToEntity(auto));
-            //DtoConverter.ConvertToEntity(auto);
         }
 
         public void InsertReservation(ReservationDto reservation)
         {
             WriteActualMethod();
-            DtoConverter.ConvertToEntity(reservation);
+            businessLayer.InsertReservation(DtoConverter.ConvertToEntity(reservation));
         }
 
         public void UpdateKunde(KundeDto modified, KundeDto original)
