@@ -1,6 +1,8 @@
 ﻿using AutoReservation.TestEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using AutoReservation.Dal;
+using AutoReservation.BusinessLayer;
 
 namespace AutoReservation.BusinessLayer.Testing
 {
@@ -20,7 +22,6 @@ namespace AutoReservation.BusinessLayer.Testing
             }
         }
 
-
         [TestInitialize]
         public void InitializeTestData()
         {
@@ -30,7 +31,15 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void UpdateAutoTest()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            string googleCar = "Google Car";
+            Auto someCar = Target.GetAutoById(1);
+            someCar.Marke = googleCar;
+
+            Auto originalCar = Target.GetAutoById(1);
+            Target.UpdateAuto(someCar, originalCar);
+
+            Auto updatedCar = Target.GetAutoById(1);
+            Assert.AreEqual(googleCar, updatedCar.Marke);
         }
 
         [TestMethod]
