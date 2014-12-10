@@ -103,6 +103,7 @@
             <ComboBox Grid.Column="1" Grid.Row="1" 
                       ItemsSource="{Binding Autos}"
                       DisplayMemberPath="Marke"
+                      Text="{Binding SelectedReservation.Auto.Marke}"
                       IsSynchronizedWithCurrentItem="True"
                       SelectedItem="{Binding SelectedReservation.Auto}"
                       />
